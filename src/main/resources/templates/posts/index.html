@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Home</title>
+<head th:replace="fragments :: head('index')">
 </head>
 <body>
 
-    <nav th:replace></nav>
+    <nav th:replace="fragments :: my-navbar"></nav>
 
-    <div th:each="post : posts">
+    <div th:each="post : ${posts}" class="blog-post">
+        <h1 th:text="${post.id}"></h1>
         <h1 th:text="${post.title}"></h1>
-        <h1 th:text="${post.body}"></h1>
+        <h2 th:text="${post.body}"></h2>
     </div>
 </body>
 </html>

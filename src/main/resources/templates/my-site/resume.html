@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Resume</title>
+<head th:replace="fragments :: head('Resume')">
 </head>
 <body>
+<nav th:replace="fragments :: my-navbar"></nav>
     <h1>Resume Page</h1>
 </body>
 </html>
