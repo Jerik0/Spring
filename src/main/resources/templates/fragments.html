@@ -1,49 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <!--HEAD FRAGMENT-->
-    <head th:fragment="head(title)">
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-        <title th:text="${title}"></title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    </head>
+<!--HEAD FRAGMENT-->
+<head th:fragment="head(title)">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+  <title th:text="${title}"></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
 
 <body>
 
-    <!--NAV BAR FRAGMENT-->
-    <nav th:fragment="my-navbar" class="navbar navbar-default">
-        <form action="/posts/{id}" th:method="post">
-            <input type="text" placeholder="Post Id#"/>
-        </form>
-        <ul>
-            <li><a href="/portfolio">Home</a></li>
-            <li><a href="/posts">Posts</a></li>
-            <li><a href="">About Me</a></li>
-        </ul>
-    </nav>
+<!--NAV BAR FRAGMENT-->
+<nav th:fragment="my-navbar" class="navbar navbar-default">
+  <ul>
+    <li><a href="/portfolio">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+    <li><a href="/about-me">About Me</a></li>
+  </ul>
+</nav>
 
-    <!--EDIT POSTS FRAGMENT-->
-    <form action="/posts/{id}/edit" method="post" th:object="${post}">
-        <div>
-            <label for="title">Title</label>
-            <input placeholder="Your Title Here" type="text" name="title" id="title" th:field="*{title}"/>
-        </div>
-        <div>
-            <label for="body">Body</label>
-            <input placeholder="Write Some Stuffs" type="text" name="body" id="body" th:field="*{body}"/>
-        </div>
-        <button class="btn btn-default">Update</button>
-    </form>
+<!--EDIT POSTS FRAGMENT-->
+<div th:fragment="posts-form(value)">
+  <div>
+    <label for="title">Title</label>
+    <input placeholder="Your Title Here" type="text" name="title" id="title" th:field="*{title}"/>
+  </div>
+  <div>
+    <label for="body">Body</label>
+    <input placeholder="Write Some Stuffs" type="text" name="body" id="body" th:field="*{body}"/>
+  </div>
+  <button class="btn btn-default" th:text="${value}"></button>
+</div>
 
-    <!--SCRIPTS FRAGMENT-->
-    <scripts th:fragment="scripts">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-                crossorigin="anonymous">
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </scripts>
+<!--SCRIPTS FRAGMENT-->
+<scripts th:fragment="scripts">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</scripts>
 
 </body>
 </html>
