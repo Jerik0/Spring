@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PostsController {
@@ -34,8 +36,20 @@ public class PostsController {
         return "posts/show";
     }
 
-//    @PostMapping("/posts/create")
-//    public String viewPostForm() {
-//        return String.format("%s", "view the form for creating a post");
-//    }
+    @GetMapping("/posts/create")
+    public String savePost(Model model) {
+        model.addAttribute("post", new Post());
+        return "posts/create";
+    }
+
+    @PostMapping("/posts/create")
+    public String viewPostForm(
+            Model model,
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "body") String body
+    ) {
+        Post post = new Post(title, body);
+        model.addAttribute(post);
+        return "posts/create";
+    }
 }
