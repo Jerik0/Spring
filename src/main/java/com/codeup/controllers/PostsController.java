@@ -1,41 +1,38 @@
 package com.codeup.controllers;
 
-import com.codeup.Post;
+import com.codeup.Repositories.PostsRepository;
+import com.codeup.models.Post;
 import com.codeup.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostsController {
 
-  private final PostSvc postSvc;
+  private final PostSvc postsDao;
 
   @Autowired
-  public PostsController(PostSvc postSvc) {
-    this.postSvc = postSvc;
+  public PostsController(PostSvc postDao) {
+    this.postsDao = postDao;
   }
 
-  // When URL Pattern is "/posts", adds new post to Array List.
-  // Will be updated later to use MySQL insertions.
-  @GetMapping("/posts")
+  //======================Viewing Posts======================
+  @GetMapping("/posts") // GetMapping listens for this url, "/posts" and executes the method therein.
   public String posts(Model model) {
-
-    model.addAttribute("posts", postSvc.findAll());
-    return "posts/index";
+    Iterable<Post> posts = postsDao.findAll();
+    model.addAttribute("posts", posts);
+    return "posts/index"; //It then sends the added attribute to the file in the path "posts/index".
   }
 
   @GetMapping("/posts/{id}")
   public String postIds(@PathVariable long id, Model model) {
 
-    model.addAttribute("post", postSvc.findOne(id));
+    model.addAttribute("post", postsDao.findOne(id));
     return "posts/show";
   }
-
+  //======================Creating Posts======================
   @GetMapping("/posts/create")
   public String savePost(Model model) {
     model.addAttribute("post", new Post());
@@ -43,31 +40,32 @@ public class PostsController {
   }
 
   @PostMapping("/posts/create")
-  public String viewPostForm(
-          Model model,
+  public String savePost(
           @RequestParam(name = "title") String title,
           @RequestParam(name = "body") String body
   ) {
     Post post = new Post(title, body);
-    model.addAttribute(post);
-    return "posts/create";
+    postsDao.save(post);
+    return "redirect:/posts";
   }
-
-  @GetMapping("/posts/edit")
-  public String EditPost(Model model) {
-    model.addAttribute("post", new Post());
+  //======================Editing Posts======================
+  @GetMapping("/posts/{id}/edit")
+  public String showEditForm(@PathVariable long id, Model model) {
+    Post post = postsDao.findOne(id);
+    model.addAttribute("post", post);
     return "posts/edit";
   }
 
-  @PostMapping("/posts/edit")
-  public String editPostForm(
-          Model model,
-          @RequestParam(name = "title") String title,
-          @RequestParam(name = "body") String body
-  ) {
-    Post post = new Post(title, body);
-    postSvc.save(post);
+  @PostMapping("/posts/{id}/edit")
+  public String editPostForm(@ModelAttribute Post post, Model model) {
+    postsDao.save(post);
     model.addAttribute(post);
-    return "posts/edit";
+    return "redirect:/posts";
+  }
+
+  @PostMapping("/posts/delete")
+  public String deletePost(@RequestParam(name = "id") long id) {
+    postsDao.deletePost(id);
+    return "redirect:/posts";
   }
 }

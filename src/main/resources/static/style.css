@@ -1,0 +1,100 @@
+body, html {
+  box-sizing: border-box;
+}
+
+body {
+  background: fixed #333333;
+  color: azure;
+  justify-content: center;
+}
+
+#nav-bar li {
+  font-size: 1.5em;
+  float: left;
+  list-style-type: none;
+  margin: 5px;
+}
+
+#posts-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.post-text-container {
+  font-family: 'Nunito', sans-serif;
+  font-weight: normal;
+  color: #f0ffff;
+}
+
+.post-text-container:hover {
+  text-shadow: #000000 10px 10px 5px;
+}
+
+button {
+  border-radius: 8px;
+  border-style: outset;
+  color: #333333;
+  background-color: #65dbd4;
+}
+
+.button-container {
+  display: flex inline;
+  justify-content: center;
+}
+
+/*@keyframes button-float {*/
+  /*from{top: 0; left: 0;}*/
+  /*to{top: -5px; left: -5px;}*/
+/*}*/
+
+.post-button:hover {
+  border-style: inset;
+  /*animation-name: button-float;*/
+  /*animation-duration: .5s;*/
+  color: azure;
+}
+
+.post-button a {
+  color: #333333;
+}
+
+.post-button {
+  position: relative;
+  background-color: #C6D6B8;
+  flex-grow: inherit;
+  color: #333333;
+}
+
+.blog-post {
+  flex-basis: 30%;
+  margin: 5px auto;
+  justify-content: center;
+  text-align: center;
+  background-color: #E3AD40;
+}
+
+.blog-post:hover {
+  background-color: #FCD036;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px black;
+}
+
+.blog-post a {
+  color: azure;
+  text-decoration: none;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+form input {
+  color: darkslategrey;
+  background-color: #C6D6B8;
+}
+
+.error-msg {
+  color: #dc4853;
+  text-shadow: black 10px 10px 40px 20px;
+}

@@ -1,34 +1,34 @@
 package com.codeup;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.codeup.Repositories.PostsRepository;
+import com.codeup.models.Post;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service("postSvc")
 public class PostSvc {
-  private List<Post> posts = new ArrayList<>();
 
-  public PostSvc() {
-    createAds();
+  private final PostsRepository postsDao;
+
+  @Autowired
+  public PostSvc(PostsRepository postsDao) {
+    this.postsDao = postsDao;
   }
 
-  public List<Post> findAll() {
-    return posts;
+  public Iterable<Post> findAll() {
+    return postsDao.findAll();
   }
 
   public Post save(Post post) {
-    post.setId( (long) posts.size() + 1);
-    posts.add(post);
-    return post;
+    return postsDao.save(post);
   }
 
   public Post findOne(long id) {
-    return posts.get((int) (id - 1));
+    return postsDao.findOne(id);
   }
 
-  private void createAds() {
-    save(new Post("This is the title", "This is the body"));
-    save(new Post("This is also the title", "This is also the body"));
+  public void deletePost(long id) {
+    postsDao.delete(id);
   }
 }
 

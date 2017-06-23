@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head('All The Posts')">
+<head>
+  <meta th:replace="fragments :: head('Delete a Post')"/>
 </head>
 <body>
-
 <nav th:replace="fragments :: my-navbar"></nav>
 
-<span th:text="${post.id}"></span>
-<span th:text="${post.title}"></span>
-
+<div></div>
 
 <scripts th:replace="fragments :: scripts"></scripts>
 </body>

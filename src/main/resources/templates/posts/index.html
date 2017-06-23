@@ -3,13 +3,31 @@
 <head th:replace="fragments :: head('index')">
 </head>
 <body>
+<div id="nav-container">
+  <nav th:replace="fragments :: my-navbar"></nav>
+</div>
 
-    <nav th:replace="fragments :: my-navbar"></nav>
-
-    <div th:each="post : ${posts}" class="blog-post">
-        <h1 th:text="${post.id}"></h1>
+<div id="posts-container">
+  <div th:each="post : ${posts}" class="blog-post">
+    <a th:href="'/posts/' + ${post.id}">
+      <div class="post-text-container">
         <h1 th:text="${post.title}"></h1>
-        <h2 th:text="${post.body}"></h2>
-    </div>
+        <h3 th:text="'Post Id: ' + ${post.id}"></h3>
+        <p th:text="${post.body}"></p>
+      </div>
+      <div class="button-container">
+        <form th:action="@{'/posts/' + ${post.id} + '/edit'}">
+          <button class="post-button">Edit</button>
+        </form>
+        <form th:method="post" th:action="@{'/posts/delete'}">
+          <input name="id" type="hidden" th:value="${post.id}"/>
+          <button class="post-button">Delete</button>
+        </form>
+      </div>
+    </a>
+  </div>
+</div>
+
+<scripts th:replace="fragments :: scripts"></scripts>
 </body>
 </html>

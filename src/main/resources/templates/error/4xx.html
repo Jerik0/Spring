@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('Error Msg')">
+</head>
+<body>
+<h1 th:text="${error} + ', bro...LOL '" class="error-msg"></h1>
+<div><a href="/portfolio">*try again*</a></div>
+<p>Or Watch this cute video :)</p>
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube.com/watch?v=w6DW4i-mfbA"
+  frameborder="0"
+  allowfullscreen="allowfullscreen"
+>
+</iframe>
+
+<scripts th:replace="fragments :: scripts"></scripts>
+</body>
+</html>

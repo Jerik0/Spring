@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head('All The Posts')">
+<head th:replace="fragments :: head(${error} + ' error')">
 </head>
 <body>
-
 <nav th:replace="fragments :: my-navbar"></nav>
 
-<span th:text="${post.id}"></span>
-<span th:text="${post.title}"></span>
-
+<h1 class="error-msg">Oopsie, some-ting went tewwibwy, tewwibwy wong...</h1>
 
 <scripts th:replace="fragments :: scripts"></scripts>
 </body>
