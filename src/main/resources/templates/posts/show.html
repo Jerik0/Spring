@@ -5,10 +5,11 @@
 <body>
 
 <nav th:replace="fragments :: my-navbar"></nav>
-
-<span th:text="${post.id}"></span>
-<span th:text="${post.title}"></span>
-
+<div>
+  <h1 th:text="${post.title}"></h1>
+  <h4 th:text="${post.owner.email}"></h4>
+  <p th:text="${post.body}"></p>
+</div>
 
 <scripts th:replace="fragments :: scripts"></scripts>
 </body>

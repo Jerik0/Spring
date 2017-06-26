@@ -11,9 +11,9 @@
   <div th:each="post : ${posts}" class="blog-post">
     <a th:href="'/posts/' + ${post.id}">
       <div class="post-text-container">
+        <img src="/img/lemonade.svg" alt="lemonade" width="27" height="27"/>
         <h1 th:text="${post.title}"></h1>
-        <h3 th:text="'Post Id: ' + ${post.id}"></h3>
-        <p th:text="${post.body}"></p>
+        <h5 th:text="${post.owner.username}"></h5>
       </div>
       <div class="button-container">
         <form th:action="@{'/posts/' + ${post.id} + '/edit'}">

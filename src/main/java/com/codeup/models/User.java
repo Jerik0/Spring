@@ -1,5 +1,7 @@
 package com.codeup.models;
 
+import com.codeup.Repositories.UsersRepository;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,17 +14,14 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String username;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String email;
 
   @Column(nullable = false)
   private String password;
-
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-  private List<Post> posts;
 
   //=================CONSTRUCTORS, GETTERS AND SETTERS=================
   public User() {
@@ -37,6 +36,13 @@ public class User {
     this.id = id;
     this.username = username;
     this.password = password;
+  }
+
+  public User(User user) {
+    this.id = user.id;
+    this.email = user.email;
+    this.username = user.username;
+    this.password = user.password;
   }
 
   public long getId() {

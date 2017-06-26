@@ -1,9 +1,11 @@
 package com.codeup.controllers;
 
-import com.codeup.Repositories.PostsRepository;
+import com.codeup.Repositories.UsersRepository;
 import com.codeup.models.Post;
-import com.codeup.PostSvc;
+import com.codeup.svcs.PostSvc;
+import com.codeup.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class PostsController {
 
   private final PostSvc postsDao;
+  private final UsersRepository usersDao;
 
   @Autowired
-  public PostsController(PostSvc postDao) {
+  public PostsController(PostSvc postDao, UsersRepository usersDao) {
     this.postsDao = postDao;
+    this.usersDao = usersDao;
   }
 
   //======================Viewing Posts======================
@@ -45,9 +49,11 @@ public class PostsController {
           @RequestParam(name = "body") String body
   ) {
     Post post = new Post(title, body);
-    postsDao.save(post);
+    post.setOwner((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    postsDao.save(post); // here it goes
     return "redirect:/posts";
   }
+
   //======================Editing Posts======================
   @GetMapping("/posts/{id}/edit")
   public String showEditForm(@PathVariable long id, Model model) {

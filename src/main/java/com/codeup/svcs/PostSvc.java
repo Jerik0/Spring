@@ -1,4 +1,4 @@
-package com.codeup;
+package com.codeup.svcs;
 
 import com.codeup.Repositories.PostsRepository;
 import com.codeup.models.Post;

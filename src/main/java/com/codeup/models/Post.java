@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "post")
+@Table(name = "posts")
 public class Post {
   //=================TABLE/MODEL INFORMATION=================
   @Id
@@ -19,10 +19,6 @@ public class Post {
 
   @OneToOne
   private User owner;
-
-  @ManyToOne
-  @JoinColumn(name = "post_id")
-  private Post post;
 
   //=================CONSTRUCTORS, GETTERS AND SETTERS=================
   public Post() {
@@ -63,4 +59,11 @@ public class Post {
     this.body = body;
   }
 
+  public User getOwner() {
+    return owner;
+  }
+
+  public void setOwner(User owner) {
+    this.owner = owner;
+  }
 }

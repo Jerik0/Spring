@@ -8,11 +8,31 @@ body {
   justify-content: center;
 }
 
-#nav-bar li {
-  font-size: 1.5em;
+*:focus {
+  outline: none;
+}
+
+#nav-bar h2{
   float: left;
+  color: #FCD036;
+  text-shadow: -1px 0 #3296c9,0 1px #3296c9,1px 0 #3296c9, 0 -1px #3296c9;
+}
+
+#nav-bar h2:hover {
+  box-shadow: 10px 10px 5px black;
+}
+
+#nav-bar li {
+  color: #FCD036;
+  display: inline;
+  font-size: 1.5em;
+  float: right;
   list-style-type: none;
   margin: 5px;
+}
+
+#nav-bar a {
+  color: #FCD036;
 }
 
 #posts-container {
@@ -38,7 +58,7 @@ button {
 }
 
 .button-container {
-  display: flex inline;
+  display: inline-flex;
   justify-content: center;
 }
 
@@ -66,6 +86,7 @@ button {
 }
 
 .blog-post {
+  border-radius: 10px;
   flex-basis: 30%;
   margin: 5px auto;
   justify-content: center;
@@ -74,8 +95,8 @@ button {
 }
 
 .blog-post:hover {
+  border: 1px solid #29ece8;
   background-color: #FCD036;
-  border-radius: 10px;
   box-shadow: 10px 10px 5px black;
 }
 
@@ -90,6 +111,12 @@ img {
 }
 
 form input {
+  color: darkslategrey;
+  background-color: #C6D6B8;
+}
+
+form textarea {
+  border-style: inset;
   color: darkslategrey;
   background-color: #C6D6B8;
 }

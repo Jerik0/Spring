@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('Create Profile')">
+
+</head>
+<body>
+<nav th:replace="fragments :: my-navbar"></nav>
+<h1>Create Your Profile!</h1>
+
+<form th:action="@{/users/create}" th:object="${user}" th:method="post">
+  <label for="email"></label>
+  <input id="email" type="text" name="email" placeholder="E-mail Address"/>
+  <label for="username"></label>
+  <input id="username" type="text" name="username" placeholder="Username"/>
+  <label for="password"></label>
+  <input id="password" type="password" name="password" placeholder="Password"/>
+  <label for="password-confirm"></label>
+  <input id="password-confirm" type="password" name="password-confirm" placeholder="Confirm Password"/>
+  <button>Drink The Kool-Aid!</button>
+</form>
+
+<scripts th:replace="fragments :: scripts"></scripts>
+</body>
+</html>
