@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Controller
 public class PostsController {
 
@@ -32,10 +34,17 @@ public class PostsController {
 
   @GetMapping("/posts/{id}")
   public String postIds(@PathVariable long id, Model model) {
-
     model.addAttribute("post", postsDao.findOne(id));
     return "posts/show";
   }
+
+  @GetMapping("/profile")
+  public String profileRedirect(Model model) {
+    Iterable<Post> posts = postsDao.findAll();
+    model.addAttribute("posts", posts);
+    return "users/profile";
+  }
+
   //======================Creating Posts======================
   @GetMapping("/posts/create")
   public String savePost(Model model) {
@@ -48,30 +57,41 @@ public class PostsController {
           @RequestParam(name = "title") String title,
           @RequestParam(name = "body") String body
   ) {
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Post post = new Post(title, body);
-    post.setOwner((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-    postsDao.save(post); // here it goes
+    post.setOwner(user);
+    postsDao.save(post);
     return "redirect:/posts";
   }
 
   //======================Editing Posts======================
   @GetMapping("/posts/{id}/edit")
-  public String showEditForm(@PathVariable long id, Model model) {
+  public String showEditForm(
+          @PathVariable long id,
+          Model model
+  ) {
     Post post = postsDao.findOne(id);
     model.addAttribute("post", post);
     return "posts/edit";
   }
 
   @PostMapping("/posts/{id}/edit")
-  public String editPostForm(@ModelAttribute Post post, Model model) {
+  public String editPostForm(
+          @ModelAttribute Post post,
+          Model model
+  ) {
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    post.setOwner(user);
     postsDao.save(post);
     model.addAttribute(post);
     return "redirect:/posts";
   }
 
   @PostMapping("/posts/delete")
-  public String deletePost(@RequestParam(name = "id") long id) {
+  public String deletePost(
+          @RequestParam(name = "id") long id
+  ) {
     postsDao.deletePost(id);
-    return "redirect:/posts";
+    return "redirect:/profile";
   }
 }

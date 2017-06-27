@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head('index')">
+<head th:replace="fragments :: head('All The Posts')">
 </head>
 <body>
 <div id="nav-container">
@@ -11,18 +11,9 @@
   <div th:each="post : ${posts}" class="blog-post">
     <a th:href="'/posts/' + ${post.id}">
       <div class="post-text-container">
-        <img src="/img/lemonade.svg" alt="lemonade" width="27" height="27"/>
         <h1 th:text="${post.title}"></h1>
+        <img src="/img/lemonade.svg" alt="lemonade" height="32" width="32"/>
         <h5 th:text="${post.owner.username}"></h5>
-      </div>
-      <div class="button-container">
-        <form th:action="@{'/posts/' + ${post.id} + '/edit'}">
-          <button class="post-button">Edit</button>
-        </form>
-        <form th:method="post" th:action="@{'/posts/delete'}">
-          <input name="id" type="hidden" th:value="${post.id}"/>
-          <button class="post-button">Delete</button>
-        </form>
       </div>
     </a>
   </div>

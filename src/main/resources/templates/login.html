@@ -3,14 +3,19 @@
 <head th:replace="fragments :: head('Login')">
 </head>
 <body>
+<nav th:replace="fragments :: my-navbar"></nav>
+
 <h1>Log In</h1>
-<div th:if="${param.error}">
+
+<!--THE ERROR MESSAGES TO DISPLAY-->
+<div class="error" th:if="${param.error}">
   Invalid Username and Password.
 </div>
-<div th:if="${param.logout}">
+<div class="error" th:if="${param.logout}">
   You have been logged out.
 </div>
 
+<!--THE FORM FOR LOGGING A USER IN-->
 <form th:action="@{/login}" method="post">
   <label for="username">Username</label>
   <input id="username" name="username" type="text" />
@@ -18,5 +23,7 @@
   <input id="password" name="password" type="password" />
   <button>Log In</button>
 </form>
+
+<scripts th:replace="fragments :: scripts"></scripts>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.codeup.models;
 
 import com.codeup.Repositories.UsersRepository;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,12 +16,14 @@ public class User {
   private long id;
 
   @Column(nullable = false, unique = true)
+  @NotBlank(message = "Username can't be blank!")
   private String username;
 
   @Column(nullable = false, unique = true)
   private String email;
 
   @Column(nullable = false)
+  @NotBlank(message = "Password can't be blank! That's not very secure...")
   private String password;
 
   //=================CONSTRUCTORS, GETTERS AND SETTERS=================

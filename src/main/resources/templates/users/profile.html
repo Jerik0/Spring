@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments :: head('Your Profile')">
+</head>
+<body>
+<nav th:replace="fragments :: my-navbar"></nav>
+
+<div id="posts-container">
+
+  <div sec:authorize="isAuthenticated()">
+    <div th:each="post : ${posts}" class="blog-post">
+      <div th:if="${#authentication.principal.id == post.owner.id}">
+        <a th:href="'/posts/' + ${post.id}">
+          <div class="post-text-container">
+            <h1 th:text="${post.title}"></h1>
+            <img src="/img/lemonade.svg" alt="lemonade" height="32" width="32"/>
+            <h5 th:text="${post.owner.username}"></h5>
+          </div>
+          <div class="button-container">
+            <form th:action="@{'/posts/' + ${post.id} + '/edit'}">
+              <button class="post-button">Edit</button>
+            </form>
+            <form th:method="post" th:action="@{'/posts/delete'}">
+              <input name="id" type="hidden" th:value="${post.id}"/>
+              <button class="post-button">Delete</button>
+            </form>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<scripts th:replace="fragments :: scripts"></scripts>
+</body>
+</html>

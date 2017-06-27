@@ -16,6 +16,8 @@ public class UserRole {
   @Column(name = "role")
   private String role;
 
+  //=============Getters And Setters=============
+
   public long getId() {
     return id;
   }

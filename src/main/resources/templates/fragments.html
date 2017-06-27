@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <!--HEAD FRAGMENT-->
 <head th:fragment="head(title)">
@@ -8,6 +8,7 @@
   <title th:text="${title}"></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/style.css"/>
+  <link rel="shortcut icon" href="/img/lemonade.ico" type="image/ico"/>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
           crossorigin="anonymous">
@@ -20,26 +21,38 @@
 <!--NAV BAR FRAGMENT-->
 <nav th:fragment="my-navbar" class="navbar navbar-default" id="nav-bar">
   <img src="/img/lemon.svg" alt="lemon" width="64" height="64"/>
-  <h2>Jeriko's Lemon-Squeezy Blog</h2>
+  <a href="/posts"><h2>Jeriko's Lemon-Squeezy Blog</h2></a>
   <ul>
     <li><a href="/portfolio">Home</a></li>
     <li><a href="/posts">Posts</a></li>
     <li><a href="/posts/create">Post</a></li>
     <li><a href="/resume">Resume</a></li>
-    <li><a href="/users/create">Join Us!</a></li>
+    <li sec:authorize="isAuthenticated()">
+      <a href="/profile">Profile</a>
+    </li>
+    <li sec:authorize="isAuthenticated()">
+      <form th:action="@{'/logout'}" th:method="post">
+        <button>Log Out</button>
+      </form>
+    </li>
+    <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
+    <li sec:authorize="!isAuthenticated()"><a href="/users/create">Join Us!</a></li>
   </ul>
 </nav>
 
 <!--EDIT POSTS FRAGMENT-->
 <div th:fragment="posts-form(value)" id="edit-form">
   <div>
+
     <label for="title">Title</label>
     <br/>
+    <p class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
     <input placeholder="Your Title Here" type="text" name="title" id="title" th:field="*{title}"/>
   </div>
   <div>
     <label for="body">Body</label>
     <br/>
+    <p class="error" th:if="${#fields.hasErrors('body')}" th:errors="*{body}" />
     <textarea cols="100" rows="10" placeholder="Write Some Stuffs" type="text" name="body" id="body" th:field="*{body}"></textarea>
   </div>
   <button class="btn btn-default" th:text="${value}"></button>

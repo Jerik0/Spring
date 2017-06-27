@@ -12,6 +12,11 @@ body {
   outline: none;
 }
 
+#nav-bar {
+  /*display: flex;*/
+  align-content: center;
+}
+
 #nav-bar h2{
   float: left;
   color: #FCD036;
@@ -31,8 +36,21 @@ body {
   margin: 5px;
 }
 
+#nav-bar ul {
+  float: right;
+  margin: 0;
+}
+
+#nav-bar li:hover {
+  text-decoration: none;
+}
+
 #nav-bar a {
   color: #FCD036;
+}
+
+#nav-bar a:hover {
+  text-decoration: none;
 }
 
 #posts-container {
@@ -62,11 +80,6 @@ button {
   justify-content: center;
 }
 
-/*@keyframes button-float {*/
-  /*from{top: 0; left: 0;}*/
-  /*to{top: -5px; left: -5px;}*/
-/*}*/
-
 .post-button:hover {
   border-style: inset;
   /*animation-name: button-float;*/
@@ -86,6 +99,7 @@ button {
 }
 
 .blog-post {
+  padding: 5px;
   border-radius: 10px;
   flex-basis: 30%;
   margin: 5px auto;
@@ -124,4 +138,12 @@ form textarea {
 .error-msg {
   color: #dc4853;
   text-shadow: black 10px 10px 40px 20px;
+}
+
+.error {
+  display: inline;
+  background-color: #ffa89c;
+  color: #dc4853;
+  border: 1px solid #dc4853;
+  padding: 5px;
 }
