@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('Ajax')">
+</head>
+<body>
+<nav th:replace="fragments :: my-navbar"></nav>
+
+<div class="container">
+  <div id="ajax-posts"></div>
+</div>
+
+<scripts th:replace="fragments :: scripts"></scripts>
+</body>
+</html>

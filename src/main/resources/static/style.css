@@ -12,6 +12,7 @@ body {
   outline: none;
 }
 
+/* =======================NAV BAR======================= */
 #nav-bar {
   /*display: flex;*/
   align-content: center;
@@ -53,49 +54,18 @@ body {
   text-decoration: none;
 }
 
+#nav-bar button {
+  border: none;
+  margin: 0;
+  background: transparent;
+
+}
+
+/* =======================POSTS, AND THE CONTENT WITHIN THEM======================= */
 #posts-container {
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
-}
-
-.post-text-container {
-  font-family: 'Nunito', sans-serif;
-  font-weight: normal;
-  color: #f0ffff;
-}
-
-.post-text-container:hover {
-  text-shadow: #000000 10px 10px 5px;
-}
-
-button {
-  border-radius: 8px;
-  border-style: outset;
-  color: #333333;
-  background-color: #65dbd4;
-}
-
-.button-container {
-  display: inline-flex;
-  justify-content: center;
-}
-
-.post-button:hover {
-  border-style: inset;
-  /*animation-name: button-float;*/
-  /*animation-duration: .5s;*/
-  color: azure;
-}
-
-.post-button a {
-  color: #333333;
-}
-
-.post-button {
-  position: relative;
-  background-color: #C6D6B8;
-  flex-grow: inherit;
-  color: #333333;
 }
 
 .blog-post {
@@ -119,18 +89,72 @@ button {
   text-decoration: none;
 }
 
+.post-text-container {
+  font-family: 'Nunito', sans-serif;
+  font-weight: normal;
+  color: #f0ffff;
+}
+
+.post-text-container:hover {
+  text-shadow: #000000 10px 10px 5px;
+}
+
+.button-container {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.post-button-active {
+  background-color: #efffdc;
+  color: #606060;
+}
+
+.post-button {
+  position: relative;
+  background-color: #C6D6B8;
+  flex-grow: inherit;
+  color: #333333;
+}
+
+.post-button:hover {
+  border-style: inset;
+  color: #606060;
+  background-color: #ecffdc;
+}
+
+.post-button a {
+  color: #333333;
+}
+
+/* =======================OTHER STUFF (temp name)======================= */
 img {
   height: auto;
   max-width: 100%;
 }
 
+.container {
+  /*display: flex;*/
+  justify-content: center;
+}
+
+.form-container {
+  margin: 5px;
+}
+
 form input {
   color: darkslategrey;
   background-color: #C6D6B8;
+  border-radius: 5px;
 }
 
 form textarea {
   border-style: inset;
+  color: darkslategrey;
+  background-color: #C6D6B8;
+}
+
+form button {
+  border-radius: 5px;
   color: darkslategrey;
   background-color: #C6D6B8;
 }
@@ -146,4 +170,5 @@ form textarea {
   color: #dc4853;
   border: 1px solid #dc4853;
   padding: 5px;
+  margin: 5px;
 }

@@ -5,6 +5,7 @@ import com.codeup.models.Post;
 import com.codeup.svcs.PostSvc;
 import com.codeup.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +26,24 @@ public class PostsController {
   }
 
   //======================Viewing Posts======================
-  @GetMapping("/posts") // GetMapping listens for this url, "/posts" and executes the method therein.
+  @GetMapping("/posts") //GetMapping listens for this url, "/posts" and executes the method therein.
   public String posts(Model model) {
     Iterable<Post> posts = postsDao.findAll();
     model.addAttribute("posts", posts);
     return "posts/index"; //It then sends the added attribute to the file in the path "posts/index".
+  }
+
+  //View as JSON, sends information to ajaxView method.
+  @GetMapping("/posts.json")
+  public @ResponseBody Iterable<Post> viewAllPosts(
+  ) {
+    return postsDao.findAll();
+  }
+
+  //Receives information from viewAllPostsJSON method and reroutes to /posts/ajax.
+  @GetMapping("/posts/ajax")
+  public String ajaxView() {
+    return "posts/ajax";
   }
 
   @GetMapping("/posts/{id}")

@@ -1,6 +1,7 @@
 package com.codeup.models;
 
 import com.codeup.Repositories.UsersRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -16,14 +17,15 @@ public class User {
   private long id;
 
   @Column(nullable = false, unique = true)
-  @NotBlank(message = "Username can't be blank!")
+  @NotBlank(message = "Username can't be blank")
   private String username;
 
   @Column(nullable = false, unique = true)
   private String email;
 
   @Column(nullable = false)
-  @NotBlank(message = "Password can't be blank! That's not very secure...")
+  @NotBlank(message = "Password can't be blank. That's not very secure...")
+  @JsonIgnore
   private String password;
 
   //=================CONSTRUCTORS, GETTERS AND SETTERS=================

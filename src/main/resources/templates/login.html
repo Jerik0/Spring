@@ -5,24 +5,36 @@
 <body>
 <nav th:replace="fragments :: my-navbar"></nav>
 
-<h1>Log In</h1>
+<div class="container">
 
-<!--THE ERROR MESSAGES TO DISPLAY-->
-<div class="error" th:if="${param.error}">
-  Invalid Username and Password.
-</div>
-<div class="error" th:if="${param.logout}">
-  You have been logged out.
+  <h1>Log In</h1>
+
+  <!--THE ERROR MESSAGES TO DISPLAY-->
+  <div class="error" th:if="${param.error}">
+    Invalid Username and Password.
+  </div>
+  <div class="error" th:if="${param.logout}">
+    You have been logged out.
+  </div>
+
+  <!--THE FORM FOR LOGGING A USER IN-->
+  <div class="form-container">
+    <form th:action="@{/login}" method="post">
+      <div id="username-container">
+        <label for="username">Username</label>
+        <input class="form-input" id="username" name="username" type="text" />
+      </div>
+      <div id="password-container">
+        <label for="password">Password</label>
+        <input class="form-input" id="password" name="password" type="password" />
+      </div>
+      <button class="">Log In</button>
+    </form>
+  </div>
+
 </div>
 
-<!--THE FORM FOR LOGGING A USER IN-->
-<form th:action="@{/login}" method="post">
-  <label for="username">Username</label>
-  <input id="username" name="username" type="text" />
-  <label for="password">Password</label>
-  <input id="password" name="password" type="password" />
-  <button>Log In</button>
-</form>
+
 
 <scripts th:replace="fragments :: scripts"></scripts>
 </body>
